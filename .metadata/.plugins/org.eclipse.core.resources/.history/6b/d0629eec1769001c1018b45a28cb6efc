@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Mybatis 설정 파일임을 선언하는 영역 -->
+ <!-- dtd 란? =  -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+  
+  
+  <!-- mybatis 설정과 관련된 기본 설정들을 선언하는 영역 -->
+  <configuration>
+  
+  <!-- database에 연결할 설정 정보들을 선언하는 영역 
+  
+  	default 속성
+  	Database에 연결 설정을 여러개 생성할 수 있는데 그중에서 기본으로 연결할 설정 정보를 지정하는 속성이다.
+  -->
+  	<environments default="web">
+  		<environment id="web">
+  		  		 <!-- 
+  		 
+  			 type속성: jdbc:jdbc가 커밋과 롤백을 직접 사용가능하도록 하는 옵션 / managed: jdbc가 트랜잭션에 대해 어떠한 영향도 행사하지 않는 옵션 (오토커밋)
+  		 
+  		  -->
+  		  
+  		<transactionManager type="JDBC"/>
+  		<!-- 
+  		
+  			실제 DB 접속에 관한 정보를 넣는 태그
+  			
+  			type속성
+  				POOLED : 커넥션 객체를 미리 만들어서 Pool에 저장해서 사용하는 설정, 객체 만드는데 시간을 줄일수 있다.
+  				UNPOOLED : DB요청이 올 때마다 커넥션 객체를 만들고 사용이 끝나면 닫는 설정.
+  							커넥션 객체를 미리 만들어놓는 설정이 아니므로 상대적으로 느릴 수 있다.(사용자는 크게 체감X)
+  		
+  		 -->
+  		
+  		
+		<dataSource type="POOLED">
+			<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="url" value="jdbc:oracle:thin@localhost:1521:xe"/>
+			<property name="username" value="WEB"/>
+			<property name="password" value="WEB"/>
+			
+		</dataSource>
+  		</environment>
+  		<!-- </environment>
+  		<environment id="kh">
+  		
+  		</environment>
+  		<environment id="student"> -->
+  		
+  		
+  	</environments>
+  
+  
+  </configuration>
