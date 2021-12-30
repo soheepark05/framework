@@ -1,0 +1,10 @@
+package com.kh.mybatis.member.model.service;
+
+public class MemberService {
+
+	public int getMemberCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	} //컨트럴 + 1 누르기
+
+}
