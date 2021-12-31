@@ -9,6 +9,12 @@
   
   <mapper namespace ="memberMapper">
   
+  <resultMap type="com.kh.mybatis.member.model.vo.Member" id="memberResultMap">
+  
+  </resultMap>
+  
+  
+  
   <!-- 
   	SELECT 구문
   		ID속성: 쿼리문의 고유아이디
@@ -19,5 +25,39 @@
   	
   	SELECT COUNT(*) FROM MEMBER 
   	</select>  <!-- mybatis별칭 _int -->
+  		
+  		<!-- 
+  		
+  		쿼리문에 수행결과가 담긴 resultset은resultType의 객체에 자동으로 매핑되어 리턴된다.
+  		단, 조회 결과의컬럼명과 자바 클래스에서 필드명이 동일해야 자동으로 매핑이 된다.(대소문자는 구분하지않음)
+  		
+  		
+  		1)쿼리문에서 "as별칭"으로 조회되는 컬럼명을 변경한다.(유지보수 문제로 비추)
+  		2) resultmap을 이용해서 명시적으로 컬럼명과 필드명을 매핑시켜준다(추천) 
+  		 -->
+  		
+  		
+  	<select id = "selectAll" resultType="com.kh.mybatis.member.model.vo.Member">
+  	
+  	SELECT NO, 
+       		ID, 
+       		PASSWORD, 
+       		ROLE,
+       		NAME, 
+       		PHONE, 
+       		EMAIL, 
+      		 ADDRESS, 
+      		 HOBBY, 
+       		STATUS, 
+       		ENROLL_DATE, 
+       		MODIFY_DATE
+		FROM MEMBER
+		WHERE STATUS = 'Y'
+  	
+  	
+  	
+  	
+  	</select>
+  		
   		
   </mapper>

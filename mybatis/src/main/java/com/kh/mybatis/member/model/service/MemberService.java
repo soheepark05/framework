@@ -1,9 +1,14 @@
 package com.kh.mybatis.member.model.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.kh.mybatis.common.SqlSessionTemplate;
+
 import com.kh.mybatis.member.model.dao.MemberDao;
+import com.kh.mybatis.member.model.vo.Member;
 
 public class MemberService {
 
@@ -21,5 +26,15 @@ public class MemberService {
 		
 		return count;
 	} //컨트럴 + 1 누르기
+
+	public List<Member> findAll() {
+		List<Member>members = null;
+		SqlSession session = SqlSessionTemplate.getSession();
+		members = dao.findAll(session);
+		System.out.println(members);
+		session.close();
+		
+		return members;
+	}
 
 }
