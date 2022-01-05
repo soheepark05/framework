@@ -7,6 +7,20 @@
   
 <!-- Mybatis 설정과 관련된 기본 설정들을 선언하는 영역 -->
 <configuration>
+	<!-- DB 연결정보를 외부 properties 파일에서 불러오기 위해 선언하는 영역 -->
+	<properties resource="driver.properties"/>
+	
+	<settings>
+		<!-- 파라미터의 null 값에 대한 JDBC 타입을 지정한다. -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- VO/DTO 객체의 타입에 별칭을 선언하는 영역이다. 타입에 별칭을 지어줌. -->
+	<typeAliases>
+		<typeAlias type="com.kh.mybatis.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.mybatis.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.mybatis.board.model.vo.Reply" alias="Reply"/>
+	</typeAliases>
 	
 	<!-- 
 		Database에 연결할 설정 정보들을 선언하는 영역 
@@ -14,6 +28,7 @@
 		default 속성
 			Database에 연결 설정을 여러 개 생성할 수 있는데 그 중에서 기본으로 연결할 설정 정보를 지정하는 속성이다.
 	-->
+	
 	<environments default="web">
 		<environment id="web">
 			<!-- 
@@ -32,10 +47,16 @@
 					           커넥션 객체를 미리 만들어놓는 설정이 아니므로 상대적으로 느릴 수 있다.
 			 -->
 			<dataSource type="POOLED">
+				<!-- 
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
 				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-				<property name="username" value="WEB"/>
-				<property name="password" value="WEB"/>
+				<property name="username" value="STS3"/>
+				<property name="password" value="STS3"/>
+				 -->
+				<property name="driver" value="${db.driver}"/>
+				<property name="url" value="${db.url}"/>
+				<property name="username" value="${db.username}"/>
+				<property name="password" value="${db.password}"/>
 			</dataSource>
 		</environment>
 		
@@ -51,13 +72,16 @@
 		</environment>
 		
 		<!-- 
+		
 		<environment id="student">
 		</environment>
+		
 		-->
 	</environments>
 	
 	<!-- DB에서 사용하는 쿼리문들을 담는 mapper 파일을 등록하는 영역 -->
 	<mappers>
 		<mapper resource="mappers/member/member-mapper.xml"/>
+		<mapper resource="mappers/board/board-mapper.xml"/>
 	</mappers>
 </configuration>

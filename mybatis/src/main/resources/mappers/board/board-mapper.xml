@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="boardMapper">
+	<sql id="boardListSql">
+		SELECT  B.NO, 
+		        B.TITLE, 
+		        M.ID, 
+		        B.READCOUNT, 
+		        B.ORIGINAL_FILENAME, 
+		        B.RENAMED_FILENAME, 
+		        B.CONTENT,
+		        B.TYPE,
+		        B.CREATE_DATE, 
+		        B.MODIFY_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON(B.WRITER_NO = M.NO)
+		WHERE B.STATUS = 'Y'
+	</sql>
+
+	<resultMap type="Board" id="boardListResultMap">
+		<id property="no" column="NO"/>
+		<result property="title" column="TITLE"/>
+		<result property="writerId" column="ID"/>
+		<result property="readCount" column="READCOUNT"/>
+		<result property="originalFileName" column="ORIGINAL_FILENAME"/>
+		<result property="renamedFileName" column="RENAMED_FILENAME"/>
+		<result property="content" column="CONTENT"/>
+		<result property="type" column="TYPE"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="modifyDate" column="MODIFY_DATE"/>
+	</resultMap>
+	
+	<resultMap type="Board" id="boardDetailResultMap">
+	
+	
+	</resultMap>
+
+	<select id="selectAll" parameterType="map" resultMap="boardListResultMap">
+		<!-- 
+		1. 다중 <if>를 활용한 검색 기능 구현
+		
+		SELECT  B.NO, 
+				B.TITLE, 
+				M.ID, 
+				B.READCOUNT, 
+				B.ORIGINAL_FILENAME, 
+				B.RENAMED_FILENAME, 
+				B.CONTENT, 
+				B.CREATE_DATE, 
+				B.MODIFY_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON(B.WRITER_NO = M.NO)
+		WHERE B.STATUS = 'Y'
+		<if test="writer != null">
+		  AND M.ID LIKE '%' || #{writer} || '%'
+		</if>
+		
+		<if test="title != null">
+		  AND B.TITLE LIKE '%' || #{title} || '%'		
+		</if>
+		
+		<if test="content != null">
+		  AND B.CONTENT LIKE '%' || #{content} || '%'		
+		</if>
+		-->
+		
+		<!-- 
+		2. <where>와 다중<if>를 활용한 검색 기능 구현
+		 
+		SELECT  B.NO, 
+				B.TITLE, 
+				M.ID, 
+				B.READCOUNT, 
+				B.ORIGINAL_FILENAME, 
+				B.RENAMED_FILENAME, 
+				B.CONTENT, 
+				B.CREATE_DATE, 
+				B.MODIFY_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON(B.WRITER_NO = M.NO)
+		<where>
+			<if test="writer != null">
+			  M.ID LIKE '%' || #{writer} || '%'
+			</if>
+			
+			<if test="title != null">
+			  AND B.TITLE LIKE '%' || #{title} || '%'		
+			</if>
+			
+			<if test="content != null">
+			  AND B.CONTENT LIKE '%' || #{content} || '%'		
+			</if>
+			
+			AND B.STATUS = 'Y'
+		</where>
+		-->
+		
+		<!-- 
+		3. <trim>과 다중 <if>를 활용한 검색 기능 구현
+		
+		SELECT  B.NO, 
+			B.TITLE, 
+			M.ID, 
+			B.READCOUNT, 
+			B.ORIGINAL_FILENAME, 
+			B.RENAMED_FILENAME, 
+			B.CONTENT, 
+			B.CREATE_DATE, 
+			B.MODIFY_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON(B.WRITER_NO = M.NO)
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="writer != null">
+			  M.ID LIKE '%' || #{writer} || '%'
+			</if>
+			
+			<if test="title != null">
+			  AND B.TITLE LIKE '%' || #{title} || '%'		
+			</if>
+			
+			<if test="content != null">
+			  AND B.CONTENT LIKE '%' || #{content} || '%'		
+			</if>
+			
+			AND B.STATUS = 'Y'
+		</trim>
+		-->
+		
+		<!--
+		4. <choose>, <when>, <otherwise>를 활용한 검색 기능 구현 
+		-->
+		<include refid="boardListSql"/>
+		<choose>
+			<when test="writer != null">
+				AND M.ID LIKE '%' || #{writer} || '%'
+			</when>
+			<when test="title != null">
+				AND B.TITLE LIKE '%' || #{title} || '%'
+			</when>
+			<when test="content != null">
+				AND B.CONTENT LIKE '%' || #{content} || '%'
+			</when>
+			<!-- 
+			<otherwise>
+				위의 조건 중 하나도 만족하지 않는 경우 포함될 쿼리 작성 
+			</otherwise>
+			-->
+		</choose>
+	</select>
+	
+	<select id="selectBoardListByFilters" parameterType="map" resultMap="boardListResultMap">
+		<include refid="boardListSql"/>
+		<if test="filters != null">
+		  <!-- 
+		  	AND B.TYPE IN ('B2', 'B3')
+		  	
+		  	위 결과를 만들기 위해서 foreach 태그를 사용한다.
+		  	  - collection : 파라미터로 넘어온 배열, 리스트를 지정한다.
+		  	  - item : 배열, 리스트의 각 요소들의 값이 들어가면 변수이다.
+		  	  - index : 반복 횟수 (0부터 시작한다.)
+		  	  - open : 반복 시작전에 출력할 문자열을 지정한다.
+		  	  - close : 반복 종료전에 출력할 문자열을 지정한다.
+		  	  - separator : 반복할 때마다 반복을 구분할 구분자를 지정한다.
+		  -->
+		  AND B.TYPE IN 
+		  <foreach collection="filters" item="filter" open="(" separator="," close=")">
+	  		#{filter}
+		  </foreach>
+		</if>
+	</select>
+	
+	<select id="getBoardCountByFilters" parameterType="map" resultType="_int">
+		SELECT COUNT(*) 
+		FROM BOARD
+		WHERE STATUS = 'Y'
+		<if test="list != null">
+		  AND TYPE IN 
+		  <foreach collection="list" item="filter" open="(" separator="," close=")">
+	  		#{filter}
+		  </foreach>
+		</if>
+	</select>
+	
+	<!--
+		게시글 상세 보기 (댓글 포함)
+		
+		1. 쿼리문을 각각 만들어서 하나의 ResultMap에서 매핑하는 방법
+		2. 하나의 쿼리문을 만들어서 하나의 ResultMap에서 매핑하는 방법
+	 
+	-->
+	<select id="selectBoardByNo" parameterType="_int" resultMap="boardDetailResultMap">
+		<include refid="boardListSql"/>
+		AND B.NO = #{no}
+	</select>
+	
+	<select id="selectRepliesByBoardNo" parameterType="_int" resultType="Reply">
+		SELECT  R.NO, 
+		        R.BOARD_NO, 
+		        R.CONTENT, 
+		        M.ID, 
+		        R.CREATE_DATE, 
+		        R.MODIFY_DATE
+		FROM REPLY R
+		JOIN MEMBER M ON(R.WRITER_NO = M.NO)
+		WHERE R.STATUS = 'Y' AND BOARD_NO = #{boardNo}
+		ORDER BY R.NO DESC
+	</select>
+</mapper>

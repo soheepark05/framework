@@ -1,7 +1,7 @@
 package com.kh.mybatis;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,28 +10,26 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.kh.mybatis.common.SqlSessionTemplate;
+import com.kh.mybatis.common.template.SqlSessionTemplate;
 //tdd
 
 @DisplayName("첫 번째 테스트 코드 작성")
 public class AppTest {
-	
 	//test클래스 쓰고.
-		//@Test
-		//public void shouldAnswerWithTrue() {
-		//	assertTrue(true);
-	//	} ---> test method
-	
-	
+	//@Test
+	//public void shouldAnswerWithTrue() {
+	//	assertTrue(true);
+//	} ---> test method
+
 	private SqlSession session = null;
 	
-	// 테스트 메소드들이 실행되기 전에 실행되는 메소드 (가장먼저 한 번만 실행된다.)
+	// 테스트 메소드들이 실행되기 전에 실행되는 메소드 (가장 먼저 한 번만 실행된다.)
 	@BeforeAll
 	public static void init() {
 		System.out.println("@BeforeAll");
 	}
 	
-	// 각각의 테스트 메소드들이 실행되기 전에 ((무조건)) 실행되는 메소드
+	// 각각의 테스트 메소드들이 실행되기 전에 무조건 실행되는 메소드
 	@BeforeEach
 	public void setup() {
 		System.out.println("@BeforeEach");
@@ -39,11 +37,9 @@ public class AppTest {
 		session = SqlSessionTemplate.getSession();
 	}
 	
-	
-	
-	@Test  
+	@Test
 	@Disabled // 테스트 클래스 또는 메소드를 비 활성할 수 있다. 
-	public void nothing() { //처음에 태스트가 되는지 확인만 하는것!!
+	public void nothing() {//처음에 태스트가 되는지 확인만 하는것!!
 		// 이 테스트 메소드를 통해서 현재 프로젝트가 테스트 가능한 환경인지 확인한다.
 	}
 	
