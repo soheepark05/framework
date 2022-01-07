@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import com.kh.mybatis.member.model.vo.Member;
 
-@DisplayName("Member 테스트")
+@DisplayName("MemberService 테스트")
 @TestMethodOrder(OrderAnnotation.class)
 class MemberServiceTest {
 	private MemberService service; 
@@ -40,38 +40,40 @@ class MemberServiceTest {
 	}
 	
 	@Test
-	@DisplayName("회원 수 조회 테스트")
-	@Order(1)
+	@DisplayName("회원 수 조회 테스트") //테스트 이름 적는 것.
+	@Order(1) // @Order() -> 테스트 순서 적는 것.
 	public void getMemberCountTest() {
-		int count = service.getMemberCount();
+		int count = service.getMemberCount(); //멤버 수 카운트 값 가져오고.
 		
-		assertThat(count).isPositive().isGreaterThanOrEqualTo(2); //2
+		assertThat(count).isPositive().isGreaterThanOrEqualTo(0); //2 //assertThat : 코드의 가독성을 위해 쓰는것;;//뜻은 카운트의 값이.0보다 큰지 비교(=존재하는지?)
 	}
 	
 	@Test
-	@DisplayName("모든 회원 조회 테스트")
-	@Order(2)
+	@DisplayName("모든 회원 조회 테스트") 
+	@Order(2) //두번째 순서
 	public void findAllTest() {
-		List<Member> members = null;
+		List<Member> members = null;  //멤버 리스트 객체에 null값 넣어주고
 		
 		members = service.findAll();
 		
-		assertThat(members).isNotNull()
-						   .isNotEmpty()
-						   .extracting("id")
+		assertThat(members).isNotNull()  //members에서 
+						   .isNotEmpty()   
+						   .extracting("id") //extracting = 추출 "id"를 추출?
 						   .isNotNull()	
-						   .contains("ismoon","admin2");
+						  // .contains("ismoon","admin2");
+						   .contains("admin2"); //admin2을 포함해서?
 	}
 	/*
 	 * 첫번째는 ismoon이 userid로 들어가서 한번 테스팅해주고
 	 * 두번째는 admin2가 userid로 들어가서 테스팅해준다.
 	 * */
 
-	@ParameterizedTest
-	@ValueSource(strings = {"ismoon", "admin2"})
+	@ParameterizedTest //하나의 테스트 메소드로 여러개의 파라미터에 대해서 테스트 할 수 있다.
+	//@ValueSource(strings = {"ismoon", "admin2"})
+	@ValueSource(strings= {"admin2"}) //원래 ParameterizedTest를 쓰려면 이렇게 ValueSource(=배열로 argument를 전달하는것)를 써야한다.
 	@DisplayName("회원 조회 테스트(ID로 검색)")
 	@Order(3)
-	public void findMemberByIdTest(String userId) {
+	public void findMemberByIdTest(String userId) { //FIND MEMBER ID
 		
 		Member member = service.findMemberById(userId);
 		

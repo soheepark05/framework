@@ -244,8 +244,9 @@ type Customer {&#xD;
       <name>Scott Frederick</name>
     </author>
     <id>tag:spring.io,2021-12-21:4655</id>
-    <updated>2021-12-21T21:25:42Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot &lt;code&gt;2.6.2&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
+    <updated>2021-12-21T21:25:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;strong&gt;Update Jan 5: 2022:&lt;/strong&gt; The Spring Framework version in this release includes fixes for &lt;a href="https://tanzu.vmware.com/security/cve-2021-22060"&gt;CVE-2021-22060&lt;/a&gt; whose official publication was deferred until today since many people take time off at the end of the year.&lt;/p&gt;
+&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot &lt;code&gt;2.6.2&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
 &lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.6.2"&gt;55 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
 &lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="https://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="https://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-boot/docs/2.6.2/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="https://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
@@ -259,8 +260,9 @@ type Customer {&#xD;
       <name>St?phane Nicoll</name>
     </author>
     <id>tag:spring.io,2021-12-21:4654</id>
-    <updated>2021-12-21T18:52:32Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot &lt;code&gt;2.5.8&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
+    <updated>2021-12-21T18:52:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;strong&gt;Update Jan 5: 2022:&lt;/strong&gt; The Spring Framework version in this release includes fixes for &lt;a href="https://tanzu.vmware.com/security/cve-2021-22060"&gt;CVE-2021-22060&lt;/a&gt; whose official publication was deferred until today since many people take time off at the end of the year.&lt;/p&gt;
+&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot &lt;code&gt;2.5.8&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
 &lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.5.8"&gt;46 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
 &lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="https://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="https://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-boot/docs/2.5.8/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="https://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
@@ -2670,8 +2672,9 @@ import ReactDOM from 'react-dom';&lt;/code&gt;&lt;/pre&gt;
       <name>St?phane Nicoll</name>
     </author>
     <id>tag:spring.io,2021-12-16:4645</id>
-    <updated>2021-12-16T10:05:53Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I am pleased to announce that Spring Framework &lt;code&gt;5.3.14&lt;/code&gt; and &lt;code&gt;5.2.19&lt;/code&gt; are available now.&lt;/p&gt;
+    <updated>2021-12-16T10:05:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;strong&gt;Update Jan 5, 2022:&lt;/strong&gt; The releases include fixes for &lt;a href="https://tanzu.vmware.com/security/cve-2021-22060"&gt;CVE-2021-22060&lt;/a&gt; whose official publication was deferred until today since many people take time off at the end of the year.&lt;/p&gt;
+&lt;p&gt;On behalf of the team and everyone who has contributed, I am pleased to announce that Spring Framework &lt;code&gt;5.3.14&lt;/code&gt; and &lt;code&gt;5.2.19&lt;/code&gt; are available now.&lt;/p&gt;
 &lt;p&gt;Spring Framework &lt;code&gt;5.3.14&lt;/code&gt; includes &lt;a href="https://github.com/spring-projects/spring-framework/releases/tag/v5.3.14"&gt;36 fixes and improvements&lt;/a&gt;. Spring Framework &lt;code&gt;5.2.19&lt;/code&gt; includes &lt;a href="https://github.com/spring-projects/spring-framework/releases/tag/v5.2.19.RELEASE"&gt;11 selected fixes and improvements&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Stay tuned for the announcement of Spring Framework &lt;code&gt;6.0.0-M1&lt;/code&gt; later today!&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/5.3.14/reference/html/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;

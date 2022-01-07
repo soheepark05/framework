@@ -33,11 +33,70 @@
 		<result property="modifyDate" column="MODIFY_DATE"/>
 	</resultMap>
 	
-	<resultMap type="Board" id="boardDetailResultMap">
-	
-	
+	<resultMap type="Reply" id="replyResultMap">
+		<id property="no" column="NO"/>
+		<result property="boardNo" column="BOARD_NO"/>
+		<result property="writerId" column="ID"/>
+		<result property="content" column="CONTENT"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="modifyDate" column="MODIFY_DATE"/>
 	</resultMap>
-
+	
+	<!-- 
+		1. 쿼리문을 각각 만들어서 하나의 ResultMap에서 매핑하는 방법
+		  - extends 속성 : 다른 resultMap을 상속하는 속성이다.
+		  - collection 태그는 컬렉션에 해당하는 필드에 조회 결과를 매핑할 때 사용한다.
+		    - javaType 속성 :  어떤 자바 컬렉션 타입인지 명시해준다.
+		    - select 속성 : 컬렉션을 조회하고자 하는 쿼리문의 id를 적어준다.
+		    - column 속성 : 컬렉션을 조회하고자 하는 쿼리문에 파라미터를 전달할 때 사용한다.
+		  
+		  * 1:1 관계인 객체를 조회해 오고 싶다면 association 태그를 사용해서 매핑해주면 된다.
+	<resultMap type="Board" extends="boardListResultMap" id="boardDetailResultMap">
+		<collection property="replies" javaType="arraylist" select="selectRepliesByBoardNo" column="NO" />
+	</resultMap>
+	
+	<resultMap type="Reply" id="replyResultMap">
+		<id property="no" column="NO"/>
+		<result property="boardNo" column="BOARD_NO"/>
+		<result property="writerId" column="ID"/>
+		<result property="content" column="CONTENT"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="modifyDate" column="MODIFY_DATE"/>
+	</resultMap>
+	-->
+	
+	<!-- 
+	2. 하나의 쿼리문을 만들어서 하나의 ResultMap에서 매핑하는 방법
+	
+	<resultMap type="Board" id="boardDetailResultMap">
+		<id property="no" column="B_NO"/>
+		<result property="title" column="B_TITLE"/>
+		<result property="writerId" column="B_ID"/>
+		<result property="readCount" column="B_READCOUNT"/>
+		<result property="originalFileName" column="B_ORIGINAL_FILENAME"/>
+		<result property="renamedFileName" column="B_RENAMED_FILENAME"/>
+		<result property="content" column="B_CONTENT"/>
+		<result property="type" column="B_TYPE"/>
+		<result property="createDate" column="B_CREATE_DATE"/>
+		<result property="modifyDate" column="B_MODIFY_DATE"/>
+		<collection property="replies" javaType="arraylist" resultMap="replyResultMap" />
+	</resultMap>
+	
+	<resultMap type="Reply" id="replyResultMap">
+		<id property="no" column="R_NO"/>
+		<result property="boardNo" column="R_BOARD_NO"/>
+		<result property="writerId" column="R_ID"/>
+		<result property="content" column="R_CONTENT"/>
+		<result property="createDate" column="R_CREATE_DATE"/>
+		<result property="modifyDate" column="R_MODIFY_DATE"/>
+	</resultMap>
+	-->
+	
+	<resultMap type="Board" extends="boardListResultMap" id="boardDetailResultMap">
+		<collection property="replies" javaType="arraylist" columnPrefix="R_" resultMap="replyResultMap"/>
+	</resultMap>
+	
+	
 	<select id="selectAll" parameterType="map" resultMap="boardListResultMap">
 		<!-- 
 		1. 다중 <if>를 활용한 검색 기능 구현
@@ -187,16 +246,14 @@
 	<!--
 		게시글 상세 보기 (댓글 포함)
 		
-		1. 쿼리문을 각각 만들어서 하나의 ResultMap에서 매핑하는 방법
-		2. 하나의 쿼리문을 만들어서 하나의 ResultMap에서 매핑하는 방법
-	 
-	-->
+	1. 쿼리문을 각각 만들어서 하나의 ResultMap에서 매핑하는 방법
+	
 	<select id="selectBoardByNo" parameterType="_int" resultMap="boardDetailResultMap">
 		<include refid="boardListSql"/>
 		AND B.NO = #{no}
 	</select>
 	
-	<select id="selectRepliesByBoardNo" parameterType="_int" resultType="Reply">
+	<select id="selectRepliesByBoardNo" parameterType="_int" resultMap="replyResultMap">
 		SELECT  R.NO, 
 		        R.BOARD_NO, 
 		        R.CONTENT, 
@@ -208,4 +265,145 @@
 		WHERE R.STATUS = 'Y' AND BOARD_NO = #{boardNo}
 		ORDER BY R.NO DESC
 	</select>
+	-->
+	
+	<!-- 
+	2. 하나의 쿼리문을 만들어서 하나의 ResultMap에서 매핑하는 방법
+	-->
+	<select id="selectBoardByNo" parameterType="_int" resultMap="boardDetailResultMap">
+		SELECT B.NO,
+		       B.TITLE,
+		       M.ID,
+		       B.READCOUNT,
+		       B.ORIGINAL_FILENAME,
+		       B.RENAMED_FILENAME,
+		       B.CONTENT,
+		       B.TYPE,
+		       B.CREATE_DATE, 
+		       B.MODIFY_DATE,
+		       R.NO AS R_NO, 
+		       R.BOARD_NO AS R_BOARD_NO, 
+		       R.CONTENT AS R_CONTENT, 
+		       M2.ID AS R_ID, 
+		       R.CREATE_DATE AS R_CREATE_DATE, 
+		       R.MODIFY_DATE AS R_MODIFY_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON(B.WRITER_NO = M.NO)
+		LEFT OUTER JOIN REPLY R ON(B.NO = R.BOARD_NO)
+		LEFT OUTER JOIN MEMBER M2 ON(R.WRITER_NO = M2.NO)
+		WHERE B.STATUS = 'Y' AND B.NO = #{no}
+	</select>
+	
+	<insert id="insertBoard" parameterType="Board"
+			useGeneratedKeys="true" keyProperty="no" keyColumn="NO">
+	<!-- pk(no의값)값 받아오고싶으면? keyProperty=""/ useGeneratedKeys 다시 키값을 가져오는것을 허용하겠다.-->
+	INSERT INTO BOARD(
+		NO,
+		WRITER_NO,
+		TITLE,
+		CONTENT,
+		ORIGINAL_FILENAME,
+		RENAMED_FILENAME,
+		READCOUNT,
+		STATUS,
+		TYPE,
+		CREATE_DATE,
+		MODIFY_DATE
+	
+	)VALUES(
+		SEQ_BOARD_NO.NEXTVAL,
+		#{writerNo},
+		#{title},
+		#{content},
+		#{originalFileName},
+		#{renamedFileName},
+		DEFAULT,
+		DEFAULT,
+		DEFAULT,
+		DEFAULT,
+		DEFAULT
+	)
+
+	</insert>
+	<update id="updateBoard" parameterType="Board"> <!-- 업데이트 할때 쓰는 쿼리 -->
+	<!-- 	
+	1. 기존 JDBC에서 사용하던 쿼리를 활용
+		UPDATE BOARD 
+	 	SET 
+		 	TITLE = #{title},
+		 	CONTENT = #{content},
+		 	ORIGINAL_FILENAME = #{originalFileName},
+		 	RENAMED_FILENAME = #{renamedFileName},
+		 	MODIFY_DATE = SYSDATE 
+	 	WHERE 
+	 		NO = #{no}
+			
+	2.다중 if 구문을 활용
+			
+ 		UPDATE BOARD 
+	 	SET 
+	 		<if test="title != null">
+		 		TITLE = #{title},
+	 		</if>
+	 		<if test="content != null">
+		 		CONTENT = #{content},
+	 		</if>
+	 		<if test="originalFileName != null">
+		 		ORIGINAL_FILENAME = #{originalFileName},
+	 		</if>
+	 		<if test="renamedFileName != null">
+		 		RENAMED_FILENAME = #{renamedFileName},
+	 		</if>
+		 	MODIFY_DATE = SYSDATE 
+	 	WHERE 
+	 		NO = #{no}
+ 		
+ 	3.<set>과 다중<if>구문을 활용	
+ 	   	UPDATE BOARD
+     	<set>
+     		<if test="title != null">
+		 		TITLE = #{title},
+	 		</if>
+	 		<if test="content != null">
+		 		CONTENT = #{content},
+	 		</if>
+	 		<if test="originalFileName != null">
+		 		ORIGINAL_FILENAME = #{originalFileName},
+	 		</if>
+	 		<if test="renamedFileName != null">
+		 		RENAMED_FILENAME = #{renamedFileName},
+	 		</if>
+		 	MODIFY_DATE = SYSDATE 
+     	</set> 
+	 	WHERE 
+	 		NO = #{no}
+	 			
+	 		4. <trim>과 다중 <if> 구문을 활용
+ -->
+ 			UPDATE BOARD <!-- 수정해야댐 -->
+ 			<trim prefix="SET" suffixOverrides=",">
+ 			<!--  쿼리문만들때 앞쪽에붙일거  / 특정문자가 오면 지워줄것 -->
+ 			
+    	    <if test="title != null">
+		 		TITLE = #{title},
+	 		</if>
+	 		<if test="content != null">
+		 		CONTENT = #{content},
+	 		</if>
+	 		<if test="originalFileName != null">
+		 		ORIGINAL_FILENAME = #{originalFileName},
+	 		</if>
+	 		<if test="renamedFileName != null">
+		 		RENAMED_FILENAME = #{renamedFileName},
+	 		</if>
+		 	MODIFY_DATE = SYSDATE 
+       	</trim>
+	 	WHERE 
+	 		NO = #{no}
+	</update>
+	
+	<update id="updateStatus" parameterType="map">
+		UPDATE BOARD SET STATUS = #{status} WHERE NO = #{no}
+	</update>
+ 
 </mapper>

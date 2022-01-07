@@ -9,8 +9,10 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.kh.mybatis.board.model.vo.Board;
 import com.kh.mybatis.common.util.PageInfo;
+
 //여러개 데이터를 보관할 수 있는 것? (리스트도 있지만) 컬렉션
 //여러개 값을 넘길 수 있는 것? = 컬렉션 
+
 public class BoardDao {
 	public int getBoardCount(SqlSession session, List<String> filters) {
 
@@ -76,5 +78,28 @@ public class BoardDao {
 	public Board findBoardByNo(SqlSession session, int no) {
 		
 		return session.selectOne("boardMapper.selectBoardByNo",no);
+	}
+
+	public int insertBoard(SqlSession session, Board board) {
+		// TODO Auto-generated method stub
+		return session.insert("boardMapper.insertBoard",board);
+	}
+
+	public int updateBoard(SqlSession session, Board board) {
+		// TODO Auto-generated method stub
+		return session.update("boardMapper.updateBoard",board); //에러나는이유: update쿼리 존재?
+	}
+
+	public int updateStatus(SqlSession session, int no, String status) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		
+		
+		map.put("no", no);
+		map.put("status", status);
+		
+		
+		//여러개 넘길때  맵객체 만들면 된다.
+		return session.update("boardMapper.updateStatus",map);//update어쩌구 쿼리문없어서 에러난다.
 	}
 }
