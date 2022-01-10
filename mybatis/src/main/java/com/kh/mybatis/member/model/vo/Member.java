@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+//member 클래스 생성 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
