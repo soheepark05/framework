@@ -9,10 +9,16 @@ import org.apache.ibatis.session.SqlSession;
 import com.kh.mybatis.member.model.dao.MemberDao;
 import com.kh.mybatis.member.model.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+
 public class MemberService {
 	private MemberDao dao = new MemberDao();
 
 	public int getMemberCount() {
+		
+		log.info("getMemberCount() 메소드 호출");
+		
 		int count = 0;
 		SqlSession session = getSession();
 		
@@ -24,6 +30,8 @@ public class MemberService {
 	}
 
 	public List<Member> findAll() {
+		log.debug("findAll() - 호출");
+		
 		List<Member> members = null;
 		SqlSession session = getSession();
 		
@@ -35,6 +43,8 @@ public class MemberService {
 	}
 
 	public Member findMemberById(String id) {
+		log.warn("findMemberById() : 경고 문구 출력");
+		
 		Member member = null;
 		SqlSession session = getSession();
 		

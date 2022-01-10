@@ -9,12 +9,18 @@ import com.kh.mybatis.board.model.dao.BoardDao;
 import com.kh.mybatis.board.model.vo.Board;
 import com.kh.mybatis.common.util.PageInfo;
 
+import lombok.extern.slf4j.Slf4j;
+
 import static com.kh.mybatis.common.template.SqlSessionTemplate.getSession;
 
+@Slf4j //lombok을 사용한다.
 public class BoardService {
 	private BoardDao dao = new BoardDao();
 	
 	public int getBoardCount(String[] filters) {
+		
+		log.info("getBoardCount() 호출");
+		
 		int count = 0;
 		SqlSession session = getSession();
 		
@@ -26,6 +32,8 @@ public class BoardService {
 	}
 
 	public List<Board> findAll(String writer, String title, String content) {
+		
+		log.info("findAll() 호출");
 		List<Board> list = null;
 		SqlSession session = getSession();
 		
@@ -38,6 +46,7 @@ public class BoardService {
 
 	public List<Board> findAll(String[] filters, PageInfo pageInfo) {
 		List<Board> list = null;
+		
 		SqlSession session = getSession();
 		
 		list = dao.findAll(session, filters, pageInfo);
@@ -48,6 +57,9 @@ public class BoardService {
 	}
 
 	public Board findBoardByNo(int no) {
+		
+		log.info("findBoardByNo() 호출");
+		
 		Board board = null;
 		SqlSession session = getSession();
 		

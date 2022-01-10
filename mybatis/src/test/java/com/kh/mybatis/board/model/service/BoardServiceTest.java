@@ -138,6 +138,10 @@ class BoardServiceTest {
 		int result = 0;
 		Board board = service.findBoardByNo(158); //158
 		Board findBoard = null;
+		
+		
+		board.setTitle("mybatis 게시글 - 수정");
+		board.setContent("mybatis로 게시글 등록을 해보았습니다. - 수정");
 		board.setOriginalFileName(null);
 		board.setRenamedFileName(null);
 		

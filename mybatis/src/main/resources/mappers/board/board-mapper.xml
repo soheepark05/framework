@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- xml최상단에 다음과 같이 xml형식을 지정하여 이하의 설정 내용이 mybatis-mapper설정임을 선언 -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+  <!-- 실제 실행할 쿼리문을 가지고 정의해놓은 설정 파일 -->
+  <!-- mapper 내부에 작성될 내용 --> <!-- namespace : 외부에서 접근할 수 있는 이름 -->
 <mapper namespace="boardMapper">
 	<sql id="boardListSql">
 		SELECT  B.NO, 
@@ -19,11 +21,11 @@
 		JOIN MEMBER M ON(B.WRITER_NO = M.NO)
 		WHERE B.STATUS = 'Y'
 	</sql>
-
+	<!-- resultMap : 조회한 결과를 객체와 Row간의 1:1 매칭이 아닌 원하는 객체의 필드에 담아 반환하고자 할때 사용 -->
 	<resultMap type="Board" id="boardListResultMap">
-		<id property="no" column="NO"/>
-		<result property="title" column="TITLE"/>
-		<result property="writerId" column="ID"/>
+		<id property="no" column="NO"/> <!-- id는 primary key / result는 일반컬럼.. -->
+		<result property="title" column="TITLE"/> <!-- property = 자바의 필드변수 이름 -->
+		<result property="writerId" column="ID"/> <!-- column = DB의 해당 컬럼 -->
 		<result property="readCount" column="READCOUNT"/>
 		<result property="originalFileName" column="ORIGINAL_FILENAME"/>
 		<result property="renamedFileName" column="RENAMED_FILENAME"/>
@@ -96,7 +98,7 @@
 		<collection property="replies" javaType="arraylist" columnPrefix="R_" resultMap="replyResultMap"/>
 	</resultMap>
 	
-	
+	<!-- select 태그 : SQL의 조회 구문을 작성할 때 사용되는 태그로, 해당 쿼리를 외부에서 접근하고자 할때 namespace.id명을 적어 접근가능하다. -->
 	<select id="selectAll" parameterType="map" resultMap="boardListResultMap">
 		<!-- 
 		1. 다중 <if>를 활용한 검색 기능 구현
