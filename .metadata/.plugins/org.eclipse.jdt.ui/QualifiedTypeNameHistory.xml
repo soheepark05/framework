@@ -34,4 +34,7 @@
     <fullyQualifiedTypeName name="com.kh.di.pet.Pet"/>
     <fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
     <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="org.springframework.test.context.junit.jupiter.SpringExtension"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.extension.ExtendWith"/>
+    <fullyQualifiedTypeName name="org.springframework.test.context.ContextConfiguration"/>
 </qualifiedTypeNameHistroy>

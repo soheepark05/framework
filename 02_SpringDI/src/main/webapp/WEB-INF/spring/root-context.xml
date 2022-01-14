@@ -6,23 +6,6 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 
-<!-- 
-	  Owner owner = new Owner("아무개", 20, new Cat("나비"));
-
- -->
-	<bean id = "owner" class = "com.kh.di.owner.Owner">
-	<constructor-arg name="name" value="아무개"/>
-	<constructor-arg name="age" value="20"/>
-	<constructor-arg name="pet" ref="cat"/> <!-- 의존성 주입하는 중 di -->
-	</bean>
-
-<!-- 
-	Pet pet = new Cat("나비")
- -->
-	<bean id = "cat" class="com.kh.di.pet.Cat">
-	<constructor-arg name="name" value="나비" />
-	</bean>
-
 </beans>
 
 

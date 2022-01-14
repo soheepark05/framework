@@ -16,7 +16,7 @@ public class Dog implements Pet {
 	@Override
 	public String bark() {
 		
-		return "멍멍! ";
+		return "멍멍!~";
 	}
 
 }

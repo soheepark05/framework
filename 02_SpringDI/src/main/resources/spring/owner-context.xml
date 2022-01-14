@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+	  Owner owner = new Owner("문인수", 20, new Cat("나비"));
+	  	
+	 <bean id="owner" class="com.kh.di.owner.Owner">
+	 	<constructor-arg name="name" value="문인수" />
+	 	<constructor-arg name="age" value="20"/>
+	 	<constructor-arg name="pet" ref="cat"/>
+	 </bean>
+		
+	 <bean id="owner" class="com.kh.di.owner.Owner">
+		<constructor-arg index="0" value="홍길동" />
+	 	<constructor-arg index="1" value="30"/>
+	 	<constructor-arg index="2" ref="dog"/>	
+	 </bean>
+  
+	 <bean id="owner" class="com.kh.di.owner.Owner" c:_0="홍길동" c:_1="30" c:_2-ref="dog"/>
+	 -->
+	 
+	 <bean id="moon" class="com.kh.di.owner.Owner" c:name="문인수" c:age="20" c:pet-ref="cat"/>
+	 <bean id="hong" class="com.kh.di.owner.Owner" c:name="홍길동" c:age="30" c:pet-ref="dog"/>
+</beans>

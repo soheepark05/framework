@@ -33,6 +33,14 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version> <!-- 얘도 5.3.14버전으로 가져온다 -->
 		</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-test --> <!-- 이거다시함봐야대 -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-test</artifactId>
+    <version>5.3.14</version>
+    <scope>test</scope>
+</dependency>			
+				
 				
 		<!-- AspectJ -->
 		<dependency>

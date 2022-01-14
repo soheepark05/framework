@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+	Pat pat = new Cat("나비")
+		
+	<bean id="cat" class="com.kh.di.pet.Cat">
+		<constructor-arg name="name" value="나비"/>
+	</bean>
+	
+	Pat pat = new Dog();
+	
+	pat.setName("댕댕이");
+	
+	<bean id="dog" class="com.kh.di.pet.Dog">
+		<property name="name" value="댕댕이"/>
+	</bean>
+ 	-->
+ 	
+ 	<!-- 생성자의 매개값이 하나일 경우 아래와 같이 작성이 가능하다. -->
+ 	<bean id="cat" class="com.kh.di.pet.Cat" c:_="고영희"/>
+ 	<bean id="dog" class="com.kh.di.pet.Dog" p:name="갱얼쥐"/>
+</beans>
