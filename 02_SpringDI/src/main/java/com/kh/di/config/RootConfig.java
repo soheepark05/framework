@@ -13,7 +13,7 @@ import org.springframework.core.io.Resource;
 	OwnerConfig.class,
 	PetConfig.class
 })
-@ComponentScan("com.kh.di")
+@ComponentScan("com.kh.di") //베이스 pakage설정해주는것
 public class RootConfig {
 	/*
 	@Bean // 별도로 빈 ID를 지정해주지 않으면 메소드명으로 ID를 지정한다.
@@ -29,7 +29,7 @@ public class RootConfig {
 	}
 	*/
 	
-	@Bean
+	@Bean //별도로 빈 ID를 지정해주지 않으면 메소드명으로 ID를 지정한다.
 	public PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
 		PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
 		

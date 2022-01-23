@@ -10,8 +10,8 @@
 	<properties>
 		<!-- 자바 버전 및 스프링 프레임워크 버전을 변경 -->
 		<java-version>11</java-version>
-		<org.springframework-version>5.3.14</org.springframework-version> <!-- 최신번전으로 바꿈 -->
-		<org.aspectj-version>1.6.10</org.aspectj-version> 
+		<org.springframework-version>5.3.14</org.springframework-version>
+		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version> <!-- 위에 있는 태그의 정보가 가져와진다. -->
+			<version>${org.springframework-version}</version>
 			<exclusions>
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
@@ -28,19 +28,19 @@
 				 </exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version> <!-- 얘도 5.3.14버전으로 가져온다 -->
+			<version>${org.springframework-version}</version>
 		</dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-test --> <!-- 이거다시함봐야대 -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-test</artifactId>
-    <version>5.3.14</version>
-    <scope>test</scope>
-</dependency>			
-				
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${org.springframework-version}</version>
+		    <scope>test</scope>
+		</dependency>
 				
 		<!-- AspectJ -->
 		<dependency>
@@ -100,81 +100,74 @@
 		</dependency>
 				
 		<!-- Servlet -->
-<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>4.0.1</version>
-    <scope>provided</scope>
-</dependency>
-
-
-<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
-<dependency>
-    <groupId>javax.servlet.jsp</groupId>
-    <artifactId>javax.servlet.jsp-api</artifactId>
-    <version>2.3.3</version>
-    <scope>provided</scope>
-</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>4.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>javax.servlet.jsp</groupId>
+		    <artifactId>javax.servlet.jsp-api</artifactId>
+		    <version>2.3.3</version>
+		    <scope>provided</scope>
+		</dependency>
 
 		<!-- JSTL -->
-<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
-<dependency>
-    <groupId>org.apache.taglibs</groupId>
-    <artifactId>taglibs-standard-impl</artifactId>
-    <version>1.2.5</version>
-
-</dependency>
-
-<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec -->
-<dependency>
-    <groupId>org.apache.taglibs</groupId>
-    <artifactId>taglibs-standard-spec</artifactId>
-    <version>1.2.5</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-jstlel -->
-<dependency>
-    <groupId>org.apache.taglibs</groupId>
-    <artifactId>taglibs-standard-jstlel</artifactId>
-    <version>1.2.5</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-compat -->
-<dependency>
-    <groupId>org.apache.taglibs</groupId>
-    <artifactId>taglibs-standard-compat</artifactId>
-    <version>1.2.5</version>
-</dependency>
-  <!-- lombok 라이브러리 -->
-    <dependency>
-	    <groupId>org.projectlombok</groupId>
-	    <artifactId>lombok</artifactId>
-	    <version>1.18.22</version>
-	    <scope>provided</scope>
-	</dependency>
+		<dependency>
+		    <groupId>org.apache.taglibs</groupId>
+		    <artifactId>taglibs-standard-impl</artifactId>
+		    <version>1.2.5</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.taglibs</groupId>
+		    <artifactId>taglibs-standard-spec</artifactId>
+		    <version>1.2.5</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.taglibs</groupId>
+		    <artifactId>taglibs-standard-jstlel</artifactId>
+		    <version>1.2.5</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.taglibs</groupId>
+		    <artifactId>taglibs-standard-compat</artifactId>
+		    <version>1.2.5</version>
+		</dependency>
+		
+		<!-- lombok 라이브러리 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.22</version>
+		    <scope>provided</scope>
+		</dependency>
 	
 		<!-- Test -->
-	<!-- Test 관련 라이브러리 -->
-	<dependency>
-	    <groupId>org.junit.jupiter</groupId>
-	    <artifactId>junit-jupiter-api</artifactId>
-	    <version>5.8.2</version>
-	    <scope>test</scope>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
-<dependency> <!-- 저장된건가? -->
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter-params</artifactId>
-    <version>5.8.2</version>
-    <scope>test</scope>
-</dependency>
-	<dependency> 
-	    <groupId>org.assertj</groupId>
-	    <artifactId>assertj-core</artifactId>
-	    <version>3.21.0</version>
-	    <scope>test</scope>
-	</dependency>	
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-api</artifactId>
+		    <version>5.8.2</version>
+		    <scope>test</scope>
+		</dependency>
 		
-	       
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-params</artifactId>
+		    <version>5.8.2</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.assertj</groupId>
+		    <artifactId>assertj-core</artifactId>
+		    <version>3.21.0</version>
+		    <scope>test</scope>
+		</dependency>       
 	</dependencies>
     <build>
         <plugins>

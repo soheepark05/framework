@@ -12,9 +12,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.kh.di.config.RootConfig;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(SpringExtension.class)//테스트의 기능을 확장한다.
 @ContextConfiguration(locations = "classpath:spring/root-context.xml")
-//@ContextConfiguration(classes = RootConfig.class)
+//@ContextConfiguration(classes = RootConfig.class)//설정파일 지정해 줄 수 있다.
 class CharacterTest {
 	// required는 빈 주입이 필수로 진행되어야 하는지 설정하는 옵션이다.
 	// required가 true일 경우 주입해야 되는 빈이 애플리케이션 컨텍스트에 존재하지 않으면 Exception이 발생한다. (default)
@@ -35,7 +35,7 @@ class CharacterTest {
  */
 	
 	
-	@Autowired(required = false)
+	@Autowired(required = false) //필요한 의존 객체의 "타입"에 해당하는 빈을 찾아 주입한다.(기본값TRUE)
 	private Character character;
 	
 	@Value("${character.name}")
@@ -44,8 +44,8 @@ class CharacterTest {
 	@Value("${character.level}")
 	private int level;
 	
-	@Value("${db.driver}")
-	private String driver;
+	@Value("${db.driver}") //드라이브꺼 가져오고싶으면 이거쓰면된다.
+	private String driver; 
 	
 	@Value("${db.url}")
 	private String url;

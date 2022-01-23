@@ -49,12 +49,13 @@ class OwnerTest {
 	public void contextTest() {
 		// 스프링의 애플리케이션 컨텍스를 활용하여 객체 간의 결합을 더욱 느슨하게 만들어준다.
 		// new GenericXmlApplicationContext("클래스패스 상의 xml 파일의 위치 지정");		
-		ApplicationContext context = 
+		
+		ApplicationContext context = new AnnotationConfigApplicationContext(RootConfig.class);
 		//		new GenericXmlApplicationContext("spring/root-context.xml");
 		//		new GenericXmlApplicationContext("classpath:spring/root-context.xml");
 		//		new GenericXmlApplicationContext("file:src/main/resources/spring/root-context.xml");
 		//		new GenericXmlApplicationContext("spring/owner-context.xml", "spring/pet-context.xml");
-				new AnnotationConfigApplicationContext(RootConfig.class);
+				
 		
 //		Owner owner = (Owner) context.getBean("moon");
 		Owner owner = context.getBean("moon", Owner.class);
